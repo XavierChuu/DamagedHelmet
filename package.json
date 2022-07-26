@@ -34,5 +34,13 @@
   "main": "script.js",
   "devDependencies": {},
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XavierChuu/DamagedHelmet.git"
+  },
+  "bugs": {
+    "url": "https://github.com/XavierChuu/DamagedHelmet/issues"
+  },
+  "homepage": "https://github.com/XavierChuu/DamagedHelmet#readme"
 }
