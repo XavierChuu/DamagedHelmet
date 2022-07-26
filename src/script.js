@@ -233,7 +233,7 @@ controls.maxDistance = 10
 controls.maxPolarAngle = 2
 controls.minPolarAngle = 0.5
 controls.autoRotate = false
-console.log(controls)
+// console.log(controls)
 
 
 /**

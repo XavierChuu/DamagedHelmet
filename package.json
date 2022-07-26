@@ -27,5 +27,12 @@
     "webpack-cli": "^4.3.1",
     "webpack-dev-server": "^3.11.2",
     "webpack-merge": "^5.7.3"
-  }
+  },
+  "name": "clear",
+  "description": "## Setup Download [Node.js](https://nodejs.org/en/download/). Run this followed commands:",
+  "version": "1.0.0",
+  "main": "script.js",
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
 }
