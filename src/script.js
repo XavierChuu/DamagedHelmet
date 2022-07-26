@@ -4,23 +4,17 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
-import { DotScreenPass } from 'three/examples/jsm/postprocessing/DotScreenPass.js'
-import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js'
-import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js'
-import { RGBShiftShader } from 'three/examples/jsm/shaders/RGBShiftShader.js'
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
 import Stats from 'stats.js'
 import * as dat from 'dat.gui'
-import { Transform } from 'cannon'
 import gsap, { clamp } from 'gsap'
 import { Camera } from 'three'
 
 /**
  * 
  */
-const stats = new Stats()
-stats.showPanel(0)
-document.body.appendChild(stats.dom)
+// const stats = new Stats()
+// stats.showPanel(0)
+// document.body.appendChild(stats.dom)
 
 /**
  * Base
@@ -29,7 +23,7 @@ document.body.appendChild(stats.dom)
 /**
  * Debug
  */
-const gui = new dat.GUI()
+// const gui = new dat.GUI()
 const debugObject = {}
 
  
@@ -83,26 +77,7 @@ const enviromentMap = cubeTextureLoader.load([
     '/textures/environmentMaps/3/nz.jpg'
 ])
 enviromentMap.encoding = THREE.sRGBEncoding
-// enviromentMap.castShadow = false
-// enviromentMap.receiveShadow = false
-// scene.background = enviromentMap
 scene.environment = enviromentMap
-
-/**
- * Material
- */
-
-// Textures
-//  const mapTexture = textureLoader.load('/models/LeePerrySmith/color.jpg')
-//  mapTexture.encoding = THREE.sRGBEncoding
- 
-//  const normalTexture = textureLoader.load('/models/LeePerrySmith/normal.jpg')
-
-// // Material
-// const material = new THREE.MeshStandardMaterial( {
-//     map: mapTexture,
-//     normalMap: normalTexture
-// } )
 
 /** Models
  * 
@@ -125,19 +100,19 @@ gltfLoader.load(
       
     
 
-        gui
-            .add(mesh.rotation, 'z')
-            .min(- Math.PI)
-            .max(Math.PI)
-            .step(0.001)
-            .name('rotation')
+        // gui
+        //     .add(mesh.rotation, 'z')
+        //     .min(- Math.PI)
+        //     .max(Math.PI)
+        //     .step(0.001)
+        //     .name('rotation')
 
         updateAllMaterials()
     }
 )
 
 debugObject.envMapIntensity = 5
-gui.add(debugObject, 'envMapIntensity').min(0).max(10).step(0.001).onChange(updateAllMaterials)
+// gui.add(debugObject, 'envMapIntensity').min(0).max(10).step(0.001).onChange(updateAllMaterials)
 
 /**
  * Point of interest
@@ -188,29 +163,6 @@ const points =
     })
 
 /**
- * Lights
- */
-// // Direction light
-// const directionLight = new THREE.DirectionalLight('#ffffff', 3)
-// directionLight.position.set(0.25, 2, -2.25)
-// directionLight.castShadow = true
-// directionLight.shadow.camera.far = 15
-// directionLight.shadow.mapSize.set(1024, 1024)
-// directionLight.shadow.mormalBias = 0.05
-
-// scene.add(directionLight)
-
-// const directionLightCameraHelper = new THREE.CameraHelper(directionLight.shadow.camera)
-// scene.add(directionLightCameraHelper)
-
-// gui.add(directionLight, 'intensity').min(0).max(10).step(0.001).name('lightIntensity')
-// gui.add(directionLight.position, 'x').min(-5).max(5).step(0.001).name('lightX')
-// gui.add(directionLight.position, 'y').min(-5).max(5).step(0.001).name('lightY')
-// gui.add(directionLight.position, 'z').min(-5).max(5).step(0.001).name('lightZ')
-
-
-
-/**
  * Camera
  */
 // Base camera
@@ -242,7 +194,8 @@ controls.autoRotate = false
  const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
     // powerPreference: 'high-performance',
-    antialias: true
+    antialias: true,
+    alpha: true
 })
 renderer.shadowMap.enabled = true
 renderer.shadowMap.type = THREE.PCFShadowMap
@@ -253,21 +206,21 @@ renderer.toneMappingExposure = 1
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
-gui
-    .add(renderer, 'toneMapping', {
-        No: THREE.NoToneMapping,
-        Linear: THREE.LinearToneMapping,
-        Reinhard: THREE.ReinhardToneMapping,
-        Cineon: THREE.CineonToneMapping,
-        ACESFilmic: THREE.ACESFilmicToneMapping
-    })
-    .onFinishChange(() =>
-    {
-        renderer.toneMapping = Number(renderer.toneMapping)
-        updateAllMaterials()
-    })
+// gui
+//     .add(renderer, 'toneMapping', {
+//         No: THREE.NoToneMapping,
+//         Linear: THREE.LinearToneMapping,
+//         Reinhard: THREE.ReinhardToneMapping,
+//         Cineon: THREE.CineonToneMapping,
+//         ACESFilmic: THREE.ACESFilmicToneMapping
+//     })
+//     .onFinishChange(() =>
+//     {
+//         renderer.toneMapping = Number(renderer.toneMapping)
+//         updateAllMaterials()
+//     })
 
-gui.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.001)
+// gui.add(renderer, 'toneMappingExposure').min(0).max(10).step(0.001)
 
 /**
  * Post processing
@@ -294,115 +247,6 @@ effectComposer.setSize(sizes.width, sizes.height)
 const renderPass = new RenderPass(scene, camera)
 effectComposer.addPass(renderPass)
 
-// // Dot screen pass
-// const dotScreenPass = new DotScreenPass()
-// dotScreenPass.enabled = false
-// effectComposer.addPass(dotScreenPass)
-
-// // Glitch pass
-// const glitchPass = new GlitchPass()
-// glitchPass.goWild = false
-// glitchPass.enabled = false
-// effectComposer.addPass(glitchPass)
-
-// // RGB shift shader
-// const rgbShifShader = new ShaderPass(RGBShiftShader)
-// rgbShifShader.enabled = false
-// effectComposer.addPass(rgbShifShader)
-
-// Unreal bloom pass
-// const unrealBloomPass = new UnrealBloomPass()
-// unrealBloomPass.strength = 0.3
-// unrealBloomPass.radius = 1
-// unrealBloomPass.threshold = 0.6
-// effectComposer.addPass(unrealBloomPass)
-
-// gui.add(unrealBloomPass, 'enabled')
-// gui.add(unrealBloomPass, 'strength').min(0).max(2).step(0.001)
-// gui.add(unrealBloomPass, 'radius').min(0).max(2).step(0.001)
-// gui.add(unrealBloomPass, 'threshold').min(0).max(2).step(0.001)
-
-// // Tint pass
-// const TintShader = {
-//     uniforms: 
-//     {
-//         tDiffuse: { value: null },
-//         uTint: { value: null }
-//     },
-//     vertexShader: `
-//         varying vec2 vUv;
-
-//         void main()
-//         {
-//             gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-
-//             vUv = uv;
-//         }
-//     `,
-//     fragmentShader: `
-//         uniform sampler2D tDiffuse;
-//         uniform vec3 uTint;
-
-//         varying vec2 vUv;
-
-//         void main()
-//         {
-//             vec4 color = texture2D(tDiffuse, vUv);
-//             color.rgb += uTint;
-
-//             gl_FragColor = color;
-//         }
-//     `
-// }
-// const tintPass = new ShaderPass(TintShader)
-// tintPass.material.uniforms.uTint.value = new THREE.Vector3()
-// effectComposer.addPass(tintPass)
-
-// gui.add(tintPass.material.uniforms.uTint.value, 'x').min(-1).max(1).step(0.001).name('red')
-// gui.add(tintPass.material.uniforms.uTint.value, 'y').min(-1).max(1).step(0.001).name('green')
-// gui.add(tintPass.material.uniforms.uTint.value, 'z').min(-1).max(1).step(0.001).name('blue')
-
-// // Displacement pass
-// const DisplacementShader = {
-//     uniforms: 
-//     {
-//         tDiffuse: { value: null },
-//         uNormalMap: { value: null }
-//     },
-//     vertexShader: `
-//         varying vec2 vUv;
-
-//         void main()
-//         {
-//             gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-
-//             vUv = uv;
-//         }
-//     `,
-//     fragmentShader: `
-//         uniform sampler2D tDiffuse;
-//         uniform sampler2D uNormalMap;
-
-//         varying vec2 vUv;
-
-//         void main()
-//         {
-//             vec3 normalColor = texture2D(uNormalMap, vUv).xyz * 2.0 - 1.0;
-//             vec2 newUv = vUv + normalColor.xy * 0.1;
-//             vec4 color = texture2D(tDiffuse, newUv);
-
-//             vec3 lightDirection = normalize(vec3(- 1.0, 1.0, 0.0));
-//             float lightness = clamp(dot(normalColor, lightDirection), 0.0, 1.0);
-//             color.rgb += lightness * 2.0;
-
-//             gl_FragColor = color;
-//         }
-//     `
-// }
-// const displacementPass = new ShaderPass(DisplacementShader)
-// displacementPass.material.uniforms.uNormalMap.value = textureLoader.load('/textures/interfaceNormalMap.png')
-// effectComposer.addPass(displacementPass)
-
 /**
  * Animate
  */
@@ -411,7 +255,7 @@ const clock = new THREE.Clock()
 
 const tick = () =>
 {
-    stats.begin()
+    // stats.begin()
 
     const elapsedTime = clock.getElapsedTime()
     // const deltaTime = elapsedTime - previousTime
@@ -462,7 +306,7 @@ const tick = () =>
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
 
-    stats.end()
+    // stats.end()
 }
 
 tick()

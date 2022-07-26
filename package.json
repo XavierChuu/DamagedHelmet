@@ -14,6 +14,7 @@
     "css-loader": "^5.0.1",
     "dat.gui": "^0.7.9",
     "file-loader": "^6.2.0",
+    "gh-pages": "^4.0.0",
     "gsap": "^3.6.0",
     "html-loader": "^1.3.2",
     "html-webpack-plugin": "^5.0.0-alpha.7",
@@ -32,7 +33,6 @@
   "description": "## Setup Download [Node.js](https://nodejs.org/en/download/). Run this followed commands:",
   "version": "1.0.0",
   "main": "script.js",
-  "devDependencies": {},
   "author": "",
   "license": "ISC",
   "repository": {
@@ -42,5 +42,6 @@
   "bugs": {
     "url": "https://github.com/XavierChuu/DamagedHelmet/issues"
   },
-  "homepage": "https://github.com/XavierChuu/DamagedHelmet#readme"
+  "homepage": "https://github.com/XavierChuu/DamagedHelmet#readme",
+  "devDependencies": {}
 }
