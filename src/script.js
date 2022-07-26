@@ -180,8 +180,8 @@ controls.target.set(0, 0.75, 0)
 controls.enableDamping = true
 controls.enablePan = false
 controls.enableZoom = true
-controls.minDistance = 3
-controls.maxDistance = 10
+controls.minDistance = 6
+controls.maxDistance = 15
 controls.maxPolarAngle = 2
 controls.minPolarAngle = 0.5
 controls.autoRotate = false
